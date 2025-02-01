@@ -51,9 +51,9 @@ class HomeController extends CI_Controller
 
 			curl_close($ch);
 
+			date_default_timezone_set('Asia/Jakarta');
 			$username = explode(' ', $headers['x-credentials-username'])[0] ?? '';
 			$password = md5('bisacoding-' . date('d') . '-' . date('m') . '-' . substr(date('Y'), 2));
-
 
 			// GET API DATA
 
