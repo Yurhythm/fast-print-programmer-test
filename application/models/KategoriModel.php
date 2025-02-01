@@ -8,6 +8,28 @@ class KategoriModel extends CI_Model {
         $this->load->database(); // Load database connection
     }
 
+	// cek unique
+    public function kategori_exists($nama_kategori) {
+        $this->db->where('nama_kategori', $nama_kategori);
+        $query = $this->db->get('kategori');
+        return $query->num_rows() > 0;
+    }
+
+    // Insert unique kategori
+    public function insert_unique_kategori($data) {
+		$unique_data = [];
+
+        foreach ($data as $row) {
+            if (!$this->kategori_exists($row['nama_kategori'])) {
+                $unique_data[] = $row;
+            }
+        }
+
+        if (!empty($unique_data)) {
+            $this->db->insert_batch('kategori', $unique_data);
+        }
+    }
+
     // Insert new kategori
     public function insert_kategori($data) {
         return $this->db->insert('kategori', $data);

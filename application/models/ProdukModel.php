@@ -8,6 +8,46 @@ class ProdukModel extends CI_Model {
         $this->load->database(); // Load database connection
     }
 
+	// cek unique
+    public function produk_exists($nama_produk) {
+        $this->db->where('nama_produk', $nama_produk);
+        $query = $this->db->get('produk');
+        return $query->num_rows() > 0;
+    }
+
+    // Insert update produk
+    public function insert_update_produk($data) {
+		$produk_insert = [];
+		foreach ($data as $row) {
+			$this->db->where('nama_kategori', $row['kategori']);
+			$query = $this->db->get('kategori')->first_row();
+			$kategori_id = $query->id_kategori??null;
+
+			$this->db->where('nama_status', $row['status']);
+			$query = $this->db->get('status')->first_row();
+			$status_id = $query->id_status??null;
+
+			$rows = [
+				'nama_produk' => $row['nama_produk'],
+				'harga' => $row['harga'],
+				'kategori_id' => $kategori_id,
+				'status_id' => $status_id,
+			];
+
+			if ($this->produk_exists($row['nama_produk'])) {
+				$this->db->where('nama_produk', $row['nama_produk']);
+        		$this->db->update('produk', $rows);
+			}else{
+				$produk_insert[] = $rows;
+			}
+		}
+
+        if (!empty($produk_insert)) {
+            $this->db->insert_batch('produk', $produk_insert);
+        }
+    }
+
+
     // Insert new produk
     public function insert_produk($data) {
         return $this->db->insert('produk', $data);

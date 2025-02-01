@@ -6,6 +6,8 @@ $route['default_controller'] = 'HomeController/index';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
+$route['get_data_from_api'] = 'HomeController/get_data_from_api';
+
 $route['product'] = 'ProductController/index';
 $route['product/(:num)'] = 'ProductController/show/$1';
 $route['product/create'] = 'ProductController/create';
