@@ -9,6 +9,7 @@ $route['translate_uri_dashes'] = FALSE;
 $route['get_data_from_api'] = 'HomeController/get_data_from_api';
 
 $route['product'] = 'ProductController/index';
+$route['product/get_data'] = 'ProductController/get_data';
 $route['product/(:num)'] = 'ProductController/show/$1';
 $route['product/create'] = 'ProductController/create';
 $route['product/(:num)/edit'] = 'ProductController/edit/$1';

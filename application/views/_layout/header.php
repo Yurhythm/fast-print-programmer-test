@@ -10,6 +10,8 @@
 	<title><?= $title ?></title>
 	<link rel="stylesheet" href="<?= base_url('vendor/twbs/bootstrap/dist/css/bootstrap.min.css') ?>">
 	<link rel="stylesheet" href="<?= base_url('assets/css/styles.css') ?>">
+	<script src="<?= base_url('assets/js/jquery-3.7.1.min.js') ?>"></script>
+	<script src="<?= base_url('assets/js/simple-datatables.min.js') ?>"></script>
 </head>
 
 <body class="sb-nav-fixed">
